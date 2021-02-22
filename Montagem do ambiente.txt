@@ -1,0 +1,31 @@
+yarn init -y
+yarn add express
+yarn add typescript -D
+yarn tsc --init         -> criar o arquivo de configuração tsconfig.json do typyscript
+Criar a pasta SRC
+	criar arquivo: server.ts
+        Configurar o arquivo tsconfig.json
+                "outdir": "./dist",
+		"rootdir": "./src",
+
+        importar o express dentro do arquivo server.ts
+        Importar os tipos do express
+	yarn add @types/express -D
+
+
+yarn add ts-node-dev -D  ===> similar ao nodemon só que para codar com typescript
+
+
+==================================================
+Colocar os padronizadores de codigo
+
+   1# editorConfig	==> garante um padrão de codigo entre editores
+   2# ESlist		==> automatiza a padronização dentro do codigo, isere de forma automatica pontos e virgulas e afins
+		yarn add eslint -D
+		yarn eslint --init => starta configuração do eslint
+		.eslintignore => criar esse arquivo  na raiz do projeto
+		yarn add eslint-import-resolver-typescript -D
+
+   3# prettier 		==>
+
+   seguir tutirial: https://www.notion.so/Padr-es-de-projeto-com-ESLint-Prettier-e-EditorConfig-0b57b47a24724c859c0cf226aa0cc3a7
