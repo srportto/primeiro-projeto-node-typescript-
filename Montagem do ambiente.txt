@@ -29,3 +29,13 @@ Colocar os padronizadores de codigo
    3# prettier 		==>
 
    seguir tutirial: https://www.notion.so/Padr-es-de-projeto-com-ESLint-Prettier-e-EditorConfig-0b57b47a24724c859c0cf226aa0cc3a7
+
+Src => pasta que possui todo o codigo "core" da aplicação
+  models ou entities => pasta(src/model) que fica a estrutura de todo o tipo de dado que precisa ser persistido na aplicação
+  routes => pasta(src/routes) que fica todas as rotas da aplicação, inclusive a principal (index) que direciona para todas as outras
+  repositories => pasta(src/repositories) que fica os arquivos para interação com as bases de dados , normalmente ha um arquivo de repositories para cada um de models
+
+      Uma conexão entre a "persistencia de dados" e as rotas, ou seja ...
+      persistência <-> repositories <-> rotas(routes)
+
+
