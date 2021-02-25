@@ -37,5 +37,14 @@ Src => pasta que possui todo o codigo "core" da aplicação
 
       Uma conexão entre a "persistencia de dados" e as rotas, ou seja ...
       persistência <-> repositories <-> rotas(routes)
+	  
+	  
+	  
+	  
+// parei em: trabalhando com dados 
+
+
+
+a arquitetura solftware deve ser moldada pensando em SoC: Separation of Concerns (separação de procupação)
 
 

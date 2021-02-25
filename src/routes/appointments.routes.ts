@@ -7,15 +7,21 @@ import {Router} from 'express';
 // startOfHour ->  start o datetime enviado na hora, zerando os minutos, seguns, etc
 import {startOfHour, parseISO, isEqual} from 'date-fns';
 import Appointment  from '../models/Appointment';
+import AppointmentsRepository from '../repositories/appointmentsRepository';
 
 
 
 
 const appointtmentsRouter = Router();
+const appointmentsRepository = new AppointmentsRepository;
 
 
+appointtmentsRouter.get('/', (request, response) => {
+  const allAppointments = appointmentsRepository.all();
 
-const appointments: Appointment [] = [];
+  return response.json(allAppointments);
+
+});
 
 
 appointtmentsRouter.post('/', (request, response) => {
@@ -25,21 +31,15 @@ appointtmentsRouter.post('/', (request, response) => {
 
   const parsedDate = startOfHour(parseISO(date));
 
-  console.log(parsedDate);
-  console.log(appointments);
+  const findAppointmentInSamedate = appointmentsRepository.findByDate(parsedDate);
 
-  const findAppointmentInSamedate = appointments.find(appointment => isEqual(parsedDate, appointment.date));
 
   if (findAppointmentInSamedate){
     return response.status(400).json({"message": "This appointment is already booked"});
   }
 
-
-  const appointment = new Appointment(provider,parsedDate);
-
-
-
-  appointments.push(appointment);
+  // na hora de criar o appointment(agendamento) tem que enviar a variavel parsedDate pois ela está com o tipo Date
+  const appointment = appointmentsRepository.create(provider, parsedDate)
 
   return response.json(appointment);
 });
