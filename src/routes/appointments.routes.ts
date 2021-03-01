@@ -39,7 +39,10 @@ appointtmentsRouter.post('/', (request, response) => {
   }
 
   // na hora de criar o appointment(agendamento) tem que enviar a variavel parsedDate pois ela está com o tipo Date
-  const appointment = appointmentsRepository.create(provider, parsedDate)
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parsedDate
+  });
 
   return response.json(appointment);
 });
