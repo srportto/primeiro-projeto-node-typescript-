@@ -41,10 +41,13 @@ Src => pasta que possui todo o codigo "core" da aplicação
 	  
 	  
 	  
-// parei em: trabalhando com dados 
+
 
 
 
 a arquitetura solftware deve ser moldada pensando em SoC: Separation of Concerns (separação de procupação)
 
+DTO - Data transfer object
 
+
+// parei em: Services & SOLID
