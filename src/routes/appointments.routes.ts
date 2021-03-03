@@ -4,10 +4,10 @@
 
 import {Router} from 'express';
 // parseISO    ->  converte string para o formato date nativo do javascrip
-// startOfHour ->  start o datetime enviado na hora, zerando os minutos, seguns, etc
-import {startOfHour, parseISO, isEqual} from 'date-fns';
+import {parseISO} from 'date-fns';
 import Appointment  from '../models/Appointment';
 import AppointmentsRepository from '../repositories/appointmentsRepository';
+import CreateAppointmentService from '../services/CreateAppointmentService';
 
 
 
@@ -25,26 +25,23 @@ appointtmentsRouter.get('/', (request, response) => {
 
 
 appointtmentsRouter.post('/', (request, response) => {
-  //provider = barbeador
-  //date = data
-  const {provider, date} =request.body;
+  try{
+    //provider = barbeador
+    //date = data
+    const {provider, date} =request.body;
 
-  const parsedDate = startOfHour(parseISO(date));
+    const parsedDate = parseISO(date);
 
-  const findAppointmentInSamedate = appointmentsRepository.findByDate(parsedDate);
+    const createAppointment = new CreateAppointmentService(appointmentsRepository);
 
+    const appointment = createAppointment.execute({date: parsedDate,provider});
 
-  if (findAppointmentInSamedate){
-    return response.status(400).json({"message": "This appointment is already booked"});
+    return response.json(appointment);
+  } catch(err) {
+    return response.status(400).json({erro: err.message});
+
   }
 
-  // na hora de criar o appointment(agendamento) tem que enviar a variavel parsedDate pois ela está com o tipo Date
-  const appointment = appointmentsRepository.create({
-    provider,
-    date: parsedDate
-  });
-
-  return response.json(appointment);
 });
 
 export default appointtmentsRouter;
